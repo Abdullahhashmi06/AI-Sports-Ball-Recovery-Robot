@@ -7,7 +7,7 @@
 #include <string>
 
 #include "protocol.h"
-#include "test_util.h"
+#include "../test_util.h"
 
 using ballrecovery::proto::EngineState;
 using ballrecovery::proto::kCommsLossTimeoutMs;
@@ -293,3 +293,36 @@ void test_faults_listed_in_telemetry(void) {
   TEST_ASSERT_EQUAL(1u, (unsigned)td["faults"].size());
   TEST_ASSERT_EQUAL(9, td["faults"][0].as<int>());
 }
+
+// ---------------------------------------------------------------------------
+// Runner.  PlatformIO's native env builds ONE binary per test_*/ group, and
+// Unity's plain runner does not call setUp/tearDown itself, so each test is
+// wrapped explicitly here.
+// ---------------------------------------------------------------------------
+
+#define RUN_WITH_FIXTURE(fn) \
+  do { \
+    setUp(); \
+    RUN_TEST(fn); \
+    tearDown(); \
+  } while (0)
+
+int main(void) {
+  UNITY_BEGIN();
+  RUN_WITH_FIXTURE(test_telemetry_and_heartbeat_cadence);
+  RUN_WITH_FIXTURE(test_telemetry_schema);
+  RUN_WITH_FIXTURE(test_telemetry_reports_engine_and_hardware_state);
+  RUN_WITH_FIXTURE(test_comms_loss_latches_and_heartbeat_does_not_clear);
+  RUN_WITH_FIXTURE(test_emergency_stop_latches_and_requires_reset_all);
+  RUN_WITH_FIXTURE(test_local_emergency_stop_triggers_latch);
+  RUN_WITH_FIXTURE(test_intake_run_collect_and_verify);
+  RUN_WITH_FIXTURE(test_intake_stopped_without_ball_is_failed_run);
+  RUN_WITH_FIXTURE(test_dispense_empty_when_no_balls);
+  RUN_WITH_FIXTURE(test_dispense_ok_decrements_storage);
+  RUN_WITH_FIXTURE(test_intake_dispense_mutual_exclusion);
+  RUN_WITH_FIXTURE(test_scope_faults_clears_non_latching_faults);
+  RUN_WITH_FIXTURE(test_faults_listed_in_telemetry);
+  return UNITY_END();
+}
+
+#undef RUN_WITH_FIXTURE

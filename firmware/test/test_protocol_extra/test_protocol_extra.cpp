@@ -9,7 +9,7 @@
 #include <string>
 
 #include "protocol.h"
-#include "test_util.h"
+#include "../test_util.h"
 
 using ballrecovery::proto::EngineState;
 using ballrecovery::proto::kMaxLineBytes;
@@ -275,3 +275,32 @@ void test_telemetry_has_no_imu_yaw(void) {
   DynamicJsonDocument td = Parse(FindLine(g->out, "TELE"));
   TEST_ASSERT_FALSE(td["imu"].containsKey("yaw"));
 }
+
+// ---------------------------------------------------------------------------
+// Runner.  PlatformIO's native env builds ONE binary per test_*/ group, and
+// Unity's plain runner does not call setUp/tearDown itself, so each test is
+// wrapped explicitly here.
+// ---------------------------------------------------------------------------
+
+#define RUN_WITH_FIXTURE(fn) \
+  do { \
+    setUp(); \
+    RUN_TEST(fn); \
+    tearDown(); \
+  } while (0)
+
+int main(void) {
+  UNITY_BEGIN();
+  RUN_WITH_FIXTURE(test_oversized_line_is_rejected_before_parsing);
+  RUN_WITH_FIXTURE(test_boot_event_semantics);
+  RUN_WITH_FIXTURE(test_full_bin_caps_storage_and_reports_full);
+  RUN_WITH_FIXTURE(test_dispense_failed_raises_fault_9);
+  RUN_WITH_FIXTURE(test_dispense_empty_result_event);
+  RUN_WITH_FIXTURE(test_busy_rejections);
+  RUN_WITH_FIXTURE(test_sequence_wraps_at_65535);
+  RUN_WITH_FIXTURE(test_reset_all_clears_estop_and_comms_faults);
+  RUN_WITH_FIXTURE(test_telemetry_has_no_imu_yaw);
+  return UNITY_END();
+}
+
+#undef RUN_WITH_FIXTURE

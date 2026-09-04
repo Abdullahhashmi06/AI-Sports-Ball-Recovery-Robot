@@ -8,7 +8,7 @@
 #include <string>
 
 #include "protocol.h"
-#include "test_util.h"
+#include "../test_util.h"
 
 using ballrecovery::proto::EngineState;
 using ballrecovery::proto::testutil::Ctx;
@@ -259,5 +259,42 @@ void test_resp_err_echoes_ack_seq_and_code(void) {
   TEST_ASSERT_EQUAL(88, doc["ack"].as<int>());
   TEST_ASSERT_EQUAL_STRING("RANGE", doc["code"].as<const char*>());
 }
+
+// ---------------------------------------------------------------------------
+// Runner.  PlatformIO's native env builds ONE binary per test_*/ group, and
+// Unity's plain runner does not call setUp/tearDown itself, so each test is
+// wrapped explicitly here.
+// ---------------------------------------------------------------------------
+
+#define RUN_WITH_FIXTURE(fn) \
+  do { \
+    setUp(); \
+    RUN_TEST(fn); \
+    tearDown(); \
+  } while (0)
+
+int main(void) {
+  UNITY_BEGIN();
+  RUN_WITH_FIXTURE(test_boot_event_emitted_with_reason_and_fw);
+  RUN_WITH_FIXTURE(test_starting_until_startup_checks_complete);
+  RUN_WITH_FIXTURE(test_completely_malformed_lines_are_discarded);
+  RUN_WITH_FIXTURE(test_unrecoverable_header_is_discarded);
+  RUN_WITH_FIXTURE(test_missing_v_answers_parse);
+  RUN_WITH_FIXTURE(test_version_mismatch_answers_version_and_raises_fault_8);
+  RUN_WITH_FIXTURE(test_unknown_type_answers_unknown_type);
+  RUN_WITH_FIXTURE(test_esp32_own_message_types_are_unknown_to_the_esp32);
+  RUN_WITH_FIXTURE(test_cmd_move_field_validation);
+  RUN_WITH_FIXTURE(test_cmd_stop_mode_validation_and_default);
+  RUN_WITH_FIXTURE(test_cmd_reset_and_dispense_field_validation);
+  RUN_WITH_FIXTURE(test_not_ready_before_startup_checks);
+  RUN_WITH_FIXTURE(test_duplicate_command_replays_stored_response_without_reexecute);
+  RUN_WITH_FIXTURE(test_heartbeat_never_triggers_a_response_or_duplicate_store);
+  RUN_WITH_FIXTURE(test_not_implemented_drive_answers_internal);
+  RUN_WITH_FIXTURE(test_resp_ok_echoes_ack_seq);
+  RUN_WITH_FIXTURE(test_resp_err_echoes_ack_seq_and_code);
+  return UNITY_END();
+}
+
+#undef RUN_WITH_FIXTURE
 
 // vim: set ts=2 sts=2 sw=2:
