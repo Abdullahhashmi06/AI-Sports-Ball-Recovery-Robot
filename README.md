@@ -39,9 +39,9 @@ docs/        Design docs, meeting notes, reports
 media/       Photos, videos, and demo recordings
 ```
 
-## Getting Started
+## Implementation Status
 
-The repository is currently scaffolded with placeholder structure only — the actual implementation has not been written yet.
+The repository now contains the **laptop ↔ ESP32 communication bring-up skeleton**: a laptop-side protocol library (`integration/communication/`), a PlatformIO ESP32 firmware skeleton with a host-testable protocol engine (`firmware/`), and unit/integration tests for both sides. Physical actuation (motors, intake, dispenser), sensor integration, AI/perception, navigation, and the full recovery workflow are **not implemented yet** — see `docs/ARCHITECTURE.md`, `docs/DECISION_LOG.md`, and the in-code `TODO(P5)` / "NOT YET IMPLEMENTED — HARDWARE REQUIRED" markers for what remains.
 
 ## Team
 

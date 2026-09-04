@@ -1,0 +1,6 @@
+# Laptop side of the laptop <-> ESP32 link (integration/communication).
+#
+# Only pyserial is required, and only to talk to real hardware: the pure
+# protocol helpers and the unit tests run with the Python standard library
+# alone (python -m unittest, no third-party packages).
+pyserial>=3.5

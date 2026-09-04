@@ -1,0 +1,11 @@
+{
+  "name": "protocol",
+  "version": "0.1.0",
+  "description": "Laptop <-> ESP32 JSON-line protocol engine (docs/COMMUNICATION_PROTOCOL.md v1). Compiled into the firmware and into the host unit tests.",
+  "keywords": "communication, protocol, json, esp32",
+  "frameworks": "*",
+  "platforms": "*",
+  "build": {
+    "srcDir": "src"
+  }
+}
