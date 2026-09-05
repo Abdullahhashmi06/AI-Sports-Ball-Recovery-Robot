@@ -16,7 +16,7 @@ Autonomous navigation subsystem (Module 2): deciding where the robot should go a
 - `localization/estimator.py` — deterministic best-known-pose container with a pluggable `PoseSource` interface. No kinematics: encoder-count → meters is gated by **OD-12**, heading/IMU fusion by **OD-13**.
 - `localization/telemetry.py` — raw protocol `TELE` bridge (`TelemetrySnapshot`). Encoder counts stay raw counts; nothing is converted or interpreted.
 - `planning/zones.py` — the four agreed zones `WEST`/`EAST`/`NORTH`/`SOUTH` (DEC-018) with configurable, unset-by-default bounds; §6.4 search-focus classification with an explicit calibration threshold.
-- `planning/interfaces.py` + `planner.py` — deterministic `NavigationInput`/`NavigationOutput`/`MovementIntent` planning (Module 2 internal). No `lin`/`ang` magnitudes are generated (**OD-07**/**OD-13**).
+- `planning/interfaces.py` + `planner.py` — deterministic `NavigationInput`/`NavigationOutput`/`MovementIntent` planning (Module 2 internal). No `lin`/`ang` magnitudes are generated (**OD-07**/**OD-13**). `exit_hint_from_payload()` is the I-1 perception→navigation seam: it converts the frozen payload form (`exit_zone` / `estimated_position` / `confidence`, per `TEAM_INTERFACE_CONTRACT.md` §6.4) into an `ExitHint` search hint with no command surface.
 
 **Not implemented yet (open decisions / hardware-gated):** odometry integration (OD-12), IMU heading + theta convention (OD-13), obstacle avoidance (OD-02/OD-08), approach geometry (OD-01/OD-04), search patterns and the I-3/I-4 directive set (OD-03), and any speed mapping (OD-07). None of these are resolved or invented here.
 

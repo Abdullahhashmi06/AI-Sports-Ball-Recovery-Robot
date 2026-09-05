@@ -38,6 +38,7 @@ from .interfaces import (
     NavigationOutput,
     NavigationStatus,
     Objective,
+    exit_hint_from_payload,
 )
 from .planner import plan_navigation
 
@@ -58,5 +59,6 @@ __all__ = [
     "NavigationOutput",
     "NavigationStatus",
     "Objective",
+    "exit_hint_from_payload",
     "plan_navigation",
 ]
