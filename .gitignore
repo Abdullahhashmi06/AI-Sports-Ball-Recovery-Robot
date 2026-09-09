@@ -13,6 +13,8 @@ env/
 *.onnx
 *.pt
 *.pth
+runs/
+labels/*.cache
 *.tflite
 *.h5
 models/

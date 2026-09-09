@@ -12,10 +12,70 @@ from __future__ import annotations
 
 import enum
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import Any, Mapping, Optional
 
 from ..localization.state import Pose, WorldPoint, _finite_number
 from .zones import ZoneId
+
+
+_zone_names = {z.value for z in ZoneId}
+
+
+def exit_hint_from_payload(payload: Mapping[str, Any]) -> "ExitHint":
+    """Build an :class:`ExitHint` from the I-1 perception payload form.
+
+    The cross-module payload (``TEAM_INTERFACE_CONTRACT.md`` §6.4 / I-1,
+    DEC-019) is the frozen vocabulary a perception module can produce
+    without knowing Module 2 internals:
+
+    * ``exit_zone``            — ``ZoneId`` or its bare name string
+      (``"WEST"`` / ``"EAST"`` / ``"NORTH"`` / ``"SOUTH"``),
+    * ``estimated_position``   — a ``WorldPoint`` or ``{"x": .., "y": ..}``
+      in meters (world frame §6.1),
+    * ``confidence``           — a finite number (the useful-vs-low
+      threshold stays a §6.4 calibration parameter, not enforced here).
+
+    Unknown extra payload keys are tolerated (additive-change policy);
+    missing/mistyped required fields raise :class:`NavigationError`.  The
+    result is a **search hint, not ground truth**, and carries no command or
+    motion surface — building it can never affect any actuator or link.
+    """
+    if not isinstance(payload, Mapping):
+        raise NavigationError("exit hint payload must be a mapping")
+
+    zone_raw = payload.get("exit_zone")
+    if isinstance(zone_raw, ZoneId):
+        zone = zone_raw
+    elif isinstance(zone_raw, str) and zone_raw in _zone_names:
+        zone = ZoneId(zone_raw)
+    else:
+        raise NavigationError(
+            "exit_zone must be a ZoneId or one of " + ", ".join(sorted(_zone_names))
+        )
+
+    position_raw = payload.get("estimated_position")
+    if isinstance(position_raw, WorldPoint):
+        position = position_raw
+    elif isinstance(position_raw, Mapping):
+        if "x" not in position_raw or "y" not in position_raw:
+            raise NavigationError(
+                "estimated_position must contain x and y (meters, world frame)"
+            )
+        position = WorldPoint(position_raw["x"], position_raw["y"])
+    else:
+        raise NavigationError(
+            "estimated_position must be a WorldPoint or {x, y} in meters"
+        )
+
+    confidence = payload.get("confidence")
+    if confidence is None:
+        raise NavigationError("confidence is required")
+    # Boundary parsers raise one error type: wrap the dataclass-level
+    # ValueError (NaN/inf/type) into a NavigationError with context.
+    try:
+        return ExitHint(zone, position, _finite_number(confidence, "confidence"))
+    except ValueError as exc:
+        raise NavigationError(f"invalid exit hint payload: {exc}") from exc
 
 
 class NavigationError(ValueError):

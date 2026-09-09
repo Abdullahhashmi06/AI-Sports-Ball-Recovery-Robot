@@ -1,0 +1,54 @@
+# Ball Detection V3 — training configuration (CORRECTED cat-37 dataset).
+#
+# Data: ai/datasets/coco-ball-v3 — official COCO 2017 images containing
+# **official category_id=37 (sports ball)** only, built with the fixed
+# converter (the V2 build accidentally used the YOLO class index 32, which is
+# "tie" in official COCO JSON — see README §4.2 warning). Every label verified
+# IoU>=0.5 against the authoritative JSON with exact count parity.
+#
+# SCOPE NOTE: hyperparameters are CPU-run-budget choices for this milestone,
+# NOT tuned values and NOT robot/scene assumptions. PUBLIC-DATASET validation
+# only; real-robot validation requires real footage (README §4.4).
+# OD-01…OD-16 remain open.
+
+# --- Model ---
+model: yolo11n.pt        # COCO-pretrained nano weights -> transfer learning (never scratch)
+single_class: ball
+
+# --- Data ---
+data: ai/datasets/coco-ball-v3/data.yaml
+
+# --- Reproducibility ---
+seed: 20260906
+deterministic: true
+
+# --- Run placement (gitignored) ---
+project: runs
+name: ball_v3
+
+# --- Training budget ---
+epochs: 15
+batch: 8
+imgsz: 640               # V3 target resolution (error-analysis §4.3.1; YOLO11 native)
+patience: 5
+device: cpu
+workers: 4
+
+# --- Chunked-execution constraint (tooling, NOT a model choice) ---
+# A full-data 640px epoch is ~21.5 min (4,262 imgs x 4x pixels vs V2's ~4.5-min
+# 320px epochs) — larger than the ~9.7-min command window, and ultralytics
+# discards partial epochs on resume (the proven V2 deadlock). `fraction`
+# trains each epoch on a seeded subset (~1,000 of 4,262 train images) so one
+# epoch + full-val pass fits comfortably in one invocation:
+#   ~1,000 imgs x ~0.31 s (640px, measured) ~ 5-6 min train
+#   + ~127 imgs x ~1.2 s  ~ 2-2.5 min val  + ~0.5 min startup  ≈ 7-9 min total.
+# The subset is chosen once from `seed` and is stable across --resume chunks.
+# A future uninterrupted machine may set fraction: 1.0 (see README §6).
+# 0.20 (853 imgs) chosen over the initial 0.235 estimate for extra headroom
+# under the ~9.7-min command window (user decision: do not increase).
+fraction: 0.20
+
+# --- Optimizer (ultralytics defaults; recorded for reproducibility) ---
+optimizer: auto
+lr0: 0.01
+cos_lr: false
