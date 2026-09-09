@@ -1,0 +1,39 @@
+# Ball Detection V2 — training configuration (REAL public COCO data).
+#
+# Data: official COCO 2017 sports-ball images (class 32 -> single class 'ball'),
+# downloaded ball-image-only via detection/data/download_coco_balls.py and
+# converted with detection/data/prepare_dataset.py --coco-json (seeded splits,
+# train capped at 2500 images as a software CPU budget — val/test uncapped).
+#
+# SCOPE NOTE: hyperparameters are CPU-run-budget choices for this milestone,
+# NOT tuned values and NOT robot/scene assumptions. This is PUBLIC-DATASET
+# validation only; real-robot validation requires real footage
+# (ai/detection/README.md §4.3). OD-01…OD-16 remain open.
+
+# --- Model ---
+model: yolo11n.pt        # COCO-pretrained nano weights -> transfer learning
+single_class: ball
+
+# --- Data ---
+data: ai/datasets/coco-ball-v2/data.yaml
+
+# --- Reproducibility ---
+seed: 20260906
+deterministic: true
+
+# --- Run placement (gitignored) ---
+project: runs
+name: ball_v2
+
+# --- Training budget (CPU-realistic for 2500 images) ---
+epochs: 15
+batch: 8
+imgsz: 320
+patience: 5
+device: cpu
+workers: 4
+
+# --- Optimizer (ultralytics defaults; recorded for reproducibility) ---
+optimizer: auto
+lr0: 0.01
+cos_lr: false

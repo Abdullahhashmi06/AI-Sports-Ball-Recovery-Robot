@@ -44,7 +44,13 @@ The **integration foundation** lives in `system/` (owned by Person 1):
   latch; undefined transitions are rejected explicitly. Entering a mission
   never generates commands — CMD_MOVE stays deferred downstream.
 
-AI perception, obstacle avoidance, and the full §9 behaviour state machine
+AI perception is now **started but not robot-ready**: `perception/` holds the
+software-only observation models, validation boundary, and objective seams,
+and `ai/detection/` adds the **Ball Detection training/inference pipeline**
+(V1→V3; V3 is the current public-dataset baseline — YOLO11n transfer learning,
+corrected COCO sports-ball dataset, NOT robot-validated; see
+`ai/detection/README.md`).
+Obstacle avoidance and the full §9 behaviour state machine
 (perception/task-directive staging, OD-03-gated) are **not implemented yet**
 — they will build on the foundation above.
 

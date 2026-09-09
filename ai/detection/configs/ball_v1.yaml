@@ -1,0 +1,39 @@
+# Ball Detection V1 — training configuration.
+#
+# SCOPE NOTE: These hyperparameters exist to make the pipeline run
+# deterministically on the tiny COCO8 proof set with CPU-appropriate batch
+# sizes. They are NOT tuned hyperparameters and imply no robot performance,
+# camera, latency, or platform assumptions. Real tuning happens only with
+# real robot footage (ai/detection/README.md §4.3) and real latency budgets
+# (OD-05 remains open).
+
+# --- Model ---
+model: yolo11n.pt        # COCO-pretrained nano weights -> transfer learning
+single_class: ball       # COCO 'sports ball' (id 32) remapped to class 0
+
+# --- Data ---
+# Proof run used: cd ai && python detection/data/prepare_dataset.py --synthetic
+# --out ai/datasets/coco8-ball (SYNTHETIC circle fixtures with positive samples —
+# COCO8 itself contains zero sports-ball positives; see prepare_dataset.py).
+# For the real public-data run, regenerate with --coco-json and update this path.
+data: ai/datasets/coco8-ball/data.yaml
+
+# --- Reproducibility ---
+seed: 20260906
+deterministic: true
+
+# --- Run placement (gitignored) ---
+project: runs
+name: ball_v1
+
+# --- Training budget (pipeline-proof scale) ---
+epochs: 20
+batch: 4                 # small batch: CPU-friendly for the 8-image proof set
+imgsz: 320               # reduced input size for CPU proof runs
+patience: 50
+device: cpu
+
+# --- Optimizer (ultralytics defaults; recorded for reproducibility) ---
+optimizer: auto
+lr0: 0.01
+cos_lr: false

@@ -1,0 +1,13 @@
+# Ball Detection V1 — ML dependencies for ai/.venv
+# Install CPU torch FIRST (see README §3):
+#   .venv/Scripts/python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+# then:
+#   .venv/Scripts/python.exe -m pip install -r detection/requirements.txt
+#
+# None of these are required by the committed unit test suite, which uses a
+# deterministic fake detector injected at the inference seam instead.
+
+ultralytics>=8.3,<9
+numpy
+pillow
+pyyaml

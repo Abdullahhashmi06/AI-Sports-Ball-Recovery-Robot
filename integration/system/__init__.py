@@ -35,6 +35,17 @@ Design constraints honoured here (per ``docs/ARCHITECTURE.md``,
 * no hardware values, calibrations, or thresholds are invented.
 """
 
+from .application import (
+    ApplicationEvent,
+    ApplicationOrchestrator,
+    ApplicationStatus,
+    StructuredEventLogger,
+    TaskObjective,
+    TaskType,
+    derive_objective,
+)
+from .commands import CommandDirective, DirectiveKind
+from .coordinator import ControlTick, CoordinatorStatus, MotionGated, SystemCoordinator
 from .state import RobotSystemState
 from .state_machine import (
     ApplicationStateMachine,
@@ -46,11 +57,24 @@ from .state_machine import (
 )
 
 __all__ = [
+    "ApplicationEvent",
+    "ApplicationOrchestrator",
     "ApplicationStateMachine",
     "ApplicationStateView",
+    "ApplicationStatus",
+    "CommandDirective",
+    "ControlTick",
+    "CoordinatorStatus",
+    "DirectiveKind",
     "LifecycleState",
     "MissionState",
+    "MotionGated",
     "RobotSystemState",
     "SafetyCondition",
+    "StructuredEventLogger",
+    "SystemCoordinator",
+    "TaskObjective",
+    "TaskType",
     "TransitionResult",
+    "derive_objective",
 ]
