@@ -1,0 +1,45 @@
+{
+  "version": "V4 suction with automatic dispensing concept",
+  "parameters_mm": {
+    "ball_nominal_diameter": 66,
+    "ball_max_diameter": 67.7,
+    "ball_pipe_inside_diameter": 100,
+    "pipe_wall": 4,
+    "mouth_inside_width": 140,
+    "mouth_inside_height": 90,
+    "pipe_bend_centreline_radius": 200,
+    "bend_angle_degrees": 60,
+    "air_branch_inside_diameter": 50,
+    "screen_hole_diameter": 7,
+    "receiver_outer_width": 360,
+    "receiver_outer_length": 230,
+    "receiver_floor_height": 222,
+    "receiver_top_height": 438,
+    "metering_bore_diameter": 76,
+    "upper_gate_z": 230,
+    "lower_gate_z": 150,
+    "gate_thickness": 4,
+    "gate_open_stroke": 94,
+    "dispenser_axis_y": 280,
+    "outlet_bend_radius": 80
+  },
+  "receiver_inlet_axis_height_mm": 325.28203230275506,
+  "valid_component_count": 94,
+  "STEP_reimport_solid_count": 94,
+  "STEP_volume_relative_difference": 1.1470312803493735e-14,
+  "sampled_ball_to_pipe_wall_checks": 25,
+  "sampled_ball_to_outlet_wall_checks": 5,
+  "gate_closed_port_coverage_and_open_clearance": "pass for both plates",
+  "one_ball_pocket_clear_height_mm": 76,
+  "overall_dimensions_mm": [
+    552.009946375974,
+    829.031549499633,
+    469.02331154993885
+  ],
+  "minimum_model_z_mm": -0.02331144993882265,
+  "limits": [
+    "No airflow, pickup-force or blower sizing validation",
+    "No structural or whole-assembly collision certification",
+    "Concept envelopes require supplier geometry and prototype testing"
+  ]
+}
