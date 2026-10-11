@@ -1,0 +1,50 @@
+id,subsystem,item,quantity,unit,proposed_material,concept_specification,status,owner,selection_gate,source_ids
+M01,Structure,Chassis plate,1,part,6061-T6 aluminium,460 x 520 x 6 mm with pipe and outlet clearances,PROPOSED_WAIT,P4,Mass stiffness and chassis layout review,M1
+M02,Structure,Frame rails,2,part,6061 aluminium section,32 x 30 x 500 mm CAD envelope; section to redesign,PROPOSED_WAIT,P4,Mass and joint design,M1
+M03,Intake,Main hollow pipe assembly,1,assembly,PVC-U or sealed PETG prototype,100 mm ID; 4 mm CAD wall; two R200 60-degree bends,TEST_RIG_FIRST,P4,Actual bore external-pressure rating and pickup trial,M3;M4
+M04,Intake,Oval pickup nozzle,1,part,PETG prototype,140 x 90 mm clear mouth,TEST_RIG_FIRST,P4,Ground clearance and surface trial,M4
+M05,Intake,Compliant nozzle lip,1,part,TPU 95A prototype or elastomer,Flexible rim fitted to oval nozzle,TEST_RIG_FIRST,P4,Non-marking wear and air leakage trial,M4
+M06,Intake,Nozzle clamp and arms,1,set,6061 aluminium and elastomer liner,Clamp and two support arms; layout envelopes,PROPOSED_WAIT,P4,Vibration mounting and ground-clearance review,M1
+M07,Storage,Sealed receiver shell,1,assembly,5052-H32 aluminium sheet,360 x 230 x 216 mm; 4 mm CAD wall,PROPOSED_WAIT,P4,Vacuum buckling leakage and total mass,M2
+M08,Storage,Sealed service lid,1,part,5052-H32 aluminium,360 x 230 x 5 mm CAD envelope,PROPOSED_WAIT,P4,Flatness stiffness and latch force,M2
+M09,Storage,Lid gasket,1,loop,Silicone or EPDM seal stock,352 x 222 mm outer layout; 2 mm CAD thickness,TEST_RIG_FIRST,P4,Seal grade compression and leakage,M6
+M10,Storage,Lid latches and handle,1,set,Stainless steel and polymer grip,Two latches plus service handle,PROPOSED_WAIT,P4,Clamping and service access,R1
+M11,Storage,Impact liner,1,part,Closed-cell elastomer,170 x 100 x 4 mm CAD pad,TEST_RIG_FIRST,P4,Ball damage adhesion and shedding trial,R1
+M12,Airflow,Retention screen,1,part,304 stainless steel,78 x 100 x 3 mm CAD envelope with 7 mm holes,TEST_RIG_FIRST,P4,Deburr and pressure-drop test,M9
+M13,Airflow,Air-only branch,1,assembly,PVC-U or suitable metal duct,50 mm ID; smooth branch to blower,TEST_RIG_FIRST,P4,Leakage filter losses and supplier ports,M3;M9
+M14,Airflow,Pipe and air-branch seal collars,2,part,Silicone or EPDM,Match actual pipe OD and ports,TEST_RIG_FIRST,P4,Compression and joint leakage,M6
+M15,Airflow,Vacuum blower,1,unit,Supplier assembly,Pressure-flow curve and electrical ratings TBD,PROPOSED_WAIT,P4/P5,Measured pickup operating point current and noise,M11
+M16,Airflow,Dust filter and housing,1,assembly,Supplier filter media and housing,Serviceable filter upstream of blower,PROPOSED_WAIT,P4/P5,Debris type filtration area and dirty-filter loss,M9
+M17,Airflow,Blower mount,1,part,6061 aluminium,118 x 124 x 4 mm CAD plate,PROPOSED_WAIT,P4,Supplier mounting and vibration,M1
+M18,Dispensing,Gravity feed hopper,1,part,5052 aluminium or sealed PETG prototype,348 x 218 mm top to 76 mm throat; custom slopes,TEST_RIG_FIRST,P4,Bridging and gravity-feed trial,M2;M4
+M19,Dispensing,Gate cassettes,2,part,6061 aluminium with POM wear guides,112 x 100 x 16 mm CAD housing,TEST_RIG_FIRST,P4,Seal grooves tolerances and stroke clearance,M1;M5
+M20,Dispensing,Sliding gate plates,2,part,POM-C acetal,110 x 92 x 4 mm; 94 mm proposed stroke,TEST_RIG_FIRST,P4,Beveled edge pinch force and singulation,M5
+M21,Dispensing,Gate face seals,2,part,Silicone or EPDM,108 x 96 mm layout around 76 mm port,TEST_RIG_FIRST,P4,Leakage friction and wear,M6
+M22,Dispensing,One-ball metering chamber,1,part,PVC-U or sealed PETG,76 mm ID; 76 mm clear distance between gate faces,TEST_RIG_FIRST,P4,Intended ball size and second-ball separation,M3;M4;M12
+M23,Dispensing,Gate position servos,2,unit,Supplier metal-geared servo assembly,40 x 20 x 40 mm envelope; torque voltage TBD,PROPOSED_WAIT,P5,Measured gate force travel and OD-11,M7;R1
+M24,Dispensing,Servo linkages and mounting,2,set,Aluminium links steel pins POM guides,94 mm slide travel; CAD link is illustrative,TEST_RIG_FIRST,P4/P5,Full trajectory mechanical advantage and blocked force,M1;M5
+M25,Dispensing,Gate position sensors,4,unit,Supplier switch or sensor,Open and closed feedback for both gates,PROPOSED_WAIT,P5,Logic interface placement and OD-11,R1
+M26,Dispensing,Pocket presence sensor,1,unit,Supplier optical sensor and polymer case,Detect one loaded metering chamber,PROPOSED_WAIT,P5,Real-ball detection debounce and OD-11,R1
+M27,Dispensing,Rear outlet chute,1,assembly,PVC-U or sealed PETG,76 mm ID; R80 bend; rear outlet axis z62 mm,TEST_RIG_FIRST,P4,Moving-ball clearance and exit handling,M3;M4
+M28,Dispensing,Exit break-beam pair,1,pair,Supplier optical electronics,Confirm a complete ball exit transition,PROPOSED_WAIT,P5,Missed double and stuck-ball trials; OD-11,R1
+M29,Dispensing,Equalization vent valve,1,unit,Supplier normally closed valve,Pressure equalization before gate actuation,PROPOSED_WAIT,P4/P5,Valve flow closure power-loss behavior and team review,M10
+M30,Dispensing,Receiver pressure sensor,1,unit,Supplier sensor,Range interface and threshold TBD,PROPOSED_WAIT,P5,Blower pressure range and equalization test,R1
+M31,Verification,Collection verification sensor,1,unit,Supplier optical sensor,Confirm delivery into receiver; not merely intake entry,PROPOSED_WAIT,P5,OD-10 placement and passage tests,R1
+E01,Drive,Geared motors with encoders,2,unit,Supplier steel copper and gear assembly,Two-motor CAD alternative; ratings TBD,PROPOSED_WAIT,P4/P5,Four-motor baseline review; OD-07 and OD-12,M8;R1
+E02,Drive,Motor driver channels,2,channel,Supplier electronics,Match voltage stall and continuous load,PROPOSED_WAIT,P5,Motor choice and protection tests,M8
+E03,Drive,Driven wheels,2,unit,Non-marking rubber and aluminium hub,150 mm diameter x 45 mm CAD width,PROPOSED_WAIT,P4,Traction mass and measured odometry,R1
+E04,Drive,Front swivel casters,2,unit,Non-marking tyre and steel fork,60 mm wheel diameter CAD envelope,PROPOSED_WAIT,P4,Chassis alternative and loaded rolling tests,R1
+E05,Control,Classic ESP32 USB-UART DevKit,1,board,Supplier PCB and components,Existing firmware target and USB serial,BASELINE_BENCH,P5,Existing bring-up procedure,R1
+E06,Control,MPU6050 breakout,1,board,Supplier PCB and components,Existing IMU class,BASELINE_BENCH,P5,Orientation wiring and OD-13,R1
+E07,Perception,USB webcam,1,unit,Supplier camera assembly,At least 1280x720 and 25-30 FPS with exposure/focus lock,BASELINE_BENCH,P2/P4,Existing camera procurement requirements,R1
+E08,Perception,Ultrasonic modules,4,unit,Supplier PCB and transducers,HC-SR04-class bench baseline; final 3-4 layout,BASELINE_BENCH,P5,OD-08 and OD-09; only two CAD envelopes shown,R1
+E09,Control,Laptop and USB serial cable,1,set,Existing laptop and copper cable,Agreed LaptopLink transport; no new on-robot compute,REUSE,P1/P5,OD-15 link validation,R1
+E10,Power,Blower power driver,1,unit,Supplier electronics,Match selected blower start and running demand,PROPOSED_WAIT,P5,Blower selection and physical stop circuit,M8
+E11,Power,Servo regulated supply,1,unit,Supplier regulator,Servo voltage and combined peak demand TBD,PROPOSED_WAIT,P5,Selected servos and measured blocked-load current,M7
+E12,Power,Battery BMS and matched charger,1,set,Supplier cells protection and charger,Voltage chemistry capacity and ratings TBD,PROPOSED_WAIT,P5,Complete measured load and runtime target,R1
+E13,Power,Logic regulators,1,set,Supplier electronics,Controller and sensor rails separated from actuator transients,PROPOSED_WAIT,P5,Actual rail loads and brownout tests,R1
+E14,Safety,Physical e-stop and power isolation,1,set,Supplier switch relay and rated contacts,Stop drive and blower; verified gate safe state,PROPOSED_WAIT,P5,OD-14 and physical testing,R1
+E15,Safety,Bench e-stop button and pull-up,1,set,Supplier switch and resistor,Existing non-actuating firmware bench prototype,BASELINE_BENCH,P5,Existing Stage 1 bring-up rules,R1
+E16,Power,Fuses wiring and connectors,1,lot,Copper suitable insulation and rated hardware,Gauges ratings and quantities TBD,PROPOSED_WAIT,P5,Measured current voltage drop and installation,R1
+F01,Fabrication,Fasteners inserts and bearing pins,1,lot,Stainless steel brass inserts and steel pins,Lengths threads and exact count TBD,PROPOSED_WAIT,P4,Final drawings and supplier components,R1
+F02,Fabrication,Joint sealant and assembly consumables,1,lot,Material-compatible sealant and hardware,Seal grade and joint process TBD,TEST_RIG_FIRST,P4,Substrate compatibility curing and leak test,M3;M6

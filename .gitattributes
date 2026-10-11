@@ -1,0 +1,2 @@
+# Generated CAD exports: preserve exporter bytes and avoid noisy text diffs.
+mechanical/suction-v4/cad/*.step binary

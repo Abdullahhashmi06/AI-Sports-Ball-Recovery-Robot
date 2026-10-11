@@ -40,6 +40,10 @@ media/*
 *.jpg
 *.jpeg
 
+# Small CAD review renders are intentional mechanical deliverables.
+!mechanical/suction-v4/images/*.png
+.venv-cad/
+
 # --- IDE / editor ---
 .vscode/*
 !.vscode/extensions.json

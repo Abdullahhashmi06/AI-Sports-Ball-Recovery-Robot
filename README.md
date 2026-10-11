@@ -118,6 +118,15 @@ Two-computer split with a single communication boundary: the ESP32 owns real-tim
 
 V2 was trained on COCO "tie" annotations due to a category-id defect (32 vs 37). Found via error analysis, fixed in code, regression-guarded, and the defective dataset quarantined at `ai/datasets/_quarantine_v2_ties_20260906/`. Never quote V2 metrics.
 
+## Mechanical Proposal for Review
+
+The [V4 suction intake and automatic one-ball dispenser](mechanical/suction-v4/README.md)
+has Fusion-compatible STEP CAD, assembly views, a hopper, two servo gates, a rear
+outlet, and a [materials/component BOM](hardware/suction-v4/MATERIALS_AND_COMPONENTS.md).
+This is a concept review package, not physically validated hardware. Its
+[integration differences](mechanical/suction-v4/INTEGRATION_REVIEW.md) need team
+review; the authoritative architecture and software safety gates remain in force.
+
 ## Team
 
 5-person university semester project.
